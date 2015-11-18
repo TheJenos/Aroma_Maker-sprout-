@@ -1,0 +1,56 @@
+Version 1.0 :-
+-Supports Lollipop And Marshmallow both!
+-UBERTC 5.2
+-Mako Hotplug
+-Governors :- zzmove, interactive, hybrid, powersave, hotplug, performance, pegasusq, interactiveplus, conservative, ondemand, userspace
+-I/O Schedulers :- noop, deadline, cfq, bfq, sio, zen, vr, fifo
+-Wake Controls :- Double Tap to wake, Sweep to wake, Sweep to sleep
+-ThunderQuake Engine 1.0 - Vibration Intensity Controller for MTK vibrators
+-Dynamic Fsync
+-CPU Boost
+-Linux version 3.10.90
+-Root Supported as permanently made selinux permissive
+
+Version 1.1 :-
+-Smartmax governor added
+-FIOPS I/O Scheduler added
+
+Version 1.2 :-
+-Governors Added :- Alucard and Wheatley
+-Some optimisations
+
+Version 2.0 :-
+-Darkness Governor added!
+-ROW and TRIPNDROID I/O Schedulers added!
+-A lot of hotplugs added. Intelli-Plug, MSM Zen Decision, AutoSMP, and as you know Mako Hotplug was already there!
+-init.d support
+As a lot of stuff is added so I bumped the version to 2.0!
+
+Version 2.1 :-
+-Toolchain changed to Sabermod 6.0!! Immense Smoothness!!
+-Removed Smartmax Governor as it gave a reboot whenever used.  
+-Removed Intelli-Plug (Gives Deep-Sleep Issues) and Mako Hotplug (Too Old). Now the hotplugs are ZEN DECISION and AUTO SMP!
+-A lot of optimizations done!
+
+Version 2.2 :-
+- Pocket Mod added! (All credits go to @Agaphetos for that) 
+-Enabled Kernel Sampage Merging!
+
+Version 2.3 :-
+-Added Blu_Active and ElementalX governors!
+
+Version 2.4 :-
+-Removed Blu_Active and ElementalX as they gave me werd errors this time.
+-Now UBERTC 6.0 toolchain, sabermod had some problems with some of my other works.
+-Gobla gestures added now! Thanks to @Teloon
+-Removed Mako Hotplug to check if it is giving the freezing issue.
+
+Version 2.5 :-
+-F2FS added
+-Kernel ver. 3.10.92 upstreamed
+-Installations with Aroma Installer! Thanks to @Teloon
+
+Version 2.6 :-
+-fixed gobla
+-upstreamed to 3.10.93 linux version
+-pocketmod timeout added

@@ -1,0 +1,130 @@
+ui_print("Preparing installation");
+mount("ext4", "EMMC", "/dev/block/platform/mtk-msdc.0/by-name/system", "/system");
+package_extract_dir("tools", "/tmp");
+set_perm(0, 0, 0777, "/tmp/mkbootimg");
+set_perm(0, 0, 0777, "/tmp/unpackbootimg");
+set_perm(0, 0, 0777, "/tmp/flash_kernel.sh");
+package_extract_dir("ini", "/tmp");
+show_progress(0.100000, 0);
+set_perm(0, 0, 0777, "/tmp/doubletap2wake"); 
+ set_perm(0, 0, 0777, "/tmp/sweep2wake"); 
+ set_perm(0, 0, 0777, "/tmp/dsdasd"); 
+ set_perm(0, 0, 0777, "/tmp/sdasd"); 
+ set_perm(0, 0, 0777, "/tmp/max_1196000"); 
+ set_perm(0, 0, 0777, "/tmp/max_1040000"); 
+ set_perm(0, 0, 0777, "/tmp/max_747500"); 
+ set_perm(0, 0, 0777, "/tmp/max_598000"); 
+ set_perm(0, 0, 0777, "/tmp/min_1300000"); 
+ set_perm(0, 0, 0777, "/tmp/min_1196000"); 
+ set_perm(0, 0, 0777, "/tmp/min_1040000"); 
+ set_perm(0, 0, 0777, "/tmp/min_747500"); 
+
+ui_print("*****Viking*****");
+show_progress(0.300000, 0);
+run_program("/tmp/flash_kernel.sh");
+ui_print("Flashed!!");
+delete("/tmp/boot.img");
+delete("/tmp/mkbootimg");
+delete("/tmp/unpackbootimg");
+delete("/tmp/flash_kernel.sh");
+ui_print("Adding install-recovery.sh and sysint...");
+delete("/system/bin/sysint");
+delete("/system/etc/install-recovery.sh");
+package_extract_file("add_initd.sh", "/tmp/add_initd.sh");
+set_perm(0, 0, 0777, "/tmp/add_initd.sh");
+run_program("/tmp/add_initd.sh");
+ui_print("-> mounting system...");
+run_program("/tmp/busybox", "mount", "/system");
+set_perm(0, 0, 0777, "/tmp/busybox");
+set_perm(0, 0, 0777, "/tmp/busybox.sh");
+ui_print("-> Install Busybox");
+run_program("/tmp/busybox","chown","-R","0.2000","/system/xbin/busybox");
+run_program("/tmp/busybox","chmod","-R","0777","/system/xbin/busybox");
+delete("/system/etc/init.d/doubletap2wake"); 
+ delete("/system/etc/init.d/sweep2wake"); 
+ delete("/system/etc/init.d/dsdasd"); 
+ delete("/system/etc/init.d/sdasd"); 
+ delete("/system/etc/init.d/max_1196000"); 
+ delete("/system/etc/init.d/max_1040000"); 
+ delete("/system/etc/init.d/max_747500"); 
+ delete("/system/etc/init.d/max_598000"); 
+ delete("/system/etc/init.d/min_1300000"); 
+ delete("/system/etc/init.d/min_1196000"); 
+ delete("/system/etc/init.d/min_1040000"); 
+ delete("/system/etc/init.d/min_747500"); 
+
+if
+ file_getprop("/tmp/aroma/mods.prop","item.1.1") == "1"
+ then
+ ui_print("-> doubletap2wake is added");
+ run_program("/tmp/busybox","cp","tmp/doubletap2wake","/system/etc/init.d/doubletap2wake");
+endif;
+ if
+ file_getprop("/tmp/aroma/mods.prop","item.1.2") == "1"
+ then
+ ui_print("-> sweep2wake is added");
+ run_program("/tmp/busybox","cp","tmp/sweep2wake","/system/etc/init.d/sweep2wake");
+endif;
+ if
+ file_getprop("/tmp/aroma/governor.prop","selected.0") == "1"
+ then
+ ui_print("-> dsdasd is Default governor");
+ run_program("/tmp/busybox","cp","tmp/dsdasd","/system/etc/init.d/dsdasd");
+endif;
+ if
+ file_getprop("/tmp/aroma/governor.prop","selected.0") == "3"
+ then
+ ui_print("-> sdasd is Default governor");
+ run_program("/tmp/busybox","cp","tmp/sdasd","/system/etc/init.d/sdasd");
+endif;
+ if
+ file_getprop("/tmp/aroma/max.prop","selected.0") == "2"
+ then
+ ui_print("-> 1196000 is Default max_freq");
+ run_program("/tmp/busybox","cp","tmp/max_1196000","/system/etc/init.d/max_1196000");
+endif;
+ if
+ file_getprop("/tmp/aroma/max.prop","selected.0") == "3"
+ then
+ ui_print("-> 1040000 is Default max_freq");
+ run_program("/tmp/busybox","cp","tmp/max_1040000","/system/etc/init.d/max_1040000");
+endif;
+ if
+ file_getprop("/tmp/aroma/max.prop","selected.0") == "4"
+ then
+ ui_print("-> 747500 is Default max_freq");
+ run_program("/tmp/busybox","cp","tmp/max_747500","/system/etc/init.d/max_747500");
+endif;
+ if
+ file_getprop("/tmp/aroma/max.prop","selected.0") == "5"
+ then
+ ui_print("-> 598000 is Default max_freq");
+ run_program("/tmp/busybox","cp","tmp/max_598000","/system/etc/init.d/max_598000");
+endif;
+ if
+ file_getprop("/tmp/aroma/min.prop","selected.0") == "1"
+ then
+ ui_print("-> 1300000 is Default min_freq");
+ run_program("/tmp/busybox","cp","tmp/min_1300000","/system/etc/init.d/min_1300000");
+endif;
+ if
+ file_getprop("/tmp/aroma/min.prop","selected.0") == "2"
+ then
+ ui_print("-> 1196000 is Default min_freq");
+ run_program("/tmp/busybox","cp","tmp/min_1196000","/system/etc/init.d/min_1196000");
+endif;
+ if
+ file_getprop("/tmp/aroma/min.prop","selected.0") == "3"
+ then
+ ui_print("-> 1040000 is Default min_freq");
+ run_program("/tmp/busybox","cp","tmp/min_1040000","/system/etc/init.d/min_1040000");
+endif;
+ if
+ file_getprop("/tmp/aroma/min.prop","selected.0") == "4"
+ then
+ ui_print("-> 747500 is Default min_freq");
+ run_program("/tmp/busybox","cp","tmp/min_747500","/system/etc/init.d/min_747500");
+endif;
+
+show_progress(1,0);
+unmount(/system);

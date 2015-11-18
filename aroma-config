@@ -1,0 +1,217 @@
+splash(5000,"logo");
+theme("miui");
+calibrate("0.9263","21","0.9944","1","yes");
+menubox(
+  #-- Title
+    "Viking",
+  
+  #-- Sub Title
+    "Please select from the Menu Below to Modify the required features",
+  
+  #-- Icon
+    "@apps",
+    
+  #-- Will be saved in /tmp/aroma/menu.prop
+    "menu.prop",
+    
+     #-------------------------+-----------------[ Menubox Items ]-------------------------+---------------#
+     # TITLE                   |  SUBTITLE                                                 |   Item Icons  #
+     #-------------------------+-----------------------------------------------------------+---------------#	
+	
+    "Kernel Installation",        "Kernel Installation with Various Features",                    "@install",      #-- selected = 1
+    "System Info",                "Get and show device/partition informations",                "@info",         #-- selected = 2
+    "ChangeLog",                  "Kernel ChangeLog",                                         "@agreement",    #-- selected = 3
+    "Quit Install",               "Leave Setup",                                            "@install"       #-- selected = 4
+
+);
+
+if prop("menu.prop","selected")=="2" then
+
+  #-- Show Please Wait
+  pleasewait("Getting System Information...");
+
+  #-- Fetch System Information
+  setvar(
+    #-- Variable Name
+      "sysinfo",
+    
+    #-- Variable Value
+      "<@center><b>Your Device System Information</b></@>\n\n"+
+      
+	  "\n"+
+	  
+      "System Size\t\t: <b><#selectbg_g>"+getdisksize("/system","m")+" MB</#></b>\n"+
+        "\tFree\t\t: <b><#selectbg_g>"+getdiskfree("/system","m")+" MB</#></b>\n\n"+
+      "Data Size\t\t: <b><#selectbg_g>"+getdisksize("/data","m")+" MB</#></b>\n"+
+        "\tFree\t\t: <b><#selectbg_g>"+getdiskfree("/data","m")+" MB</#></b>\n\n"+
+      "SDCard Size\t\t: <b><#selectbg_g>"+getdisksize("/sdcard","m")+" MB</#></b>\n"+
+        "\tFree\t\t: <b><#selectbg_g>"+getdiskfree("/sdcard","m")+" MB</#></b>\n\n"+
+
+      ""
+  );
+  
+  #-- Show Textbox
+  textbox(
+    #-- Title
+      "System Information",
+    
+    #-- Subtitle
+      "Current system Information on your Android ONE",
+    
+    #-- Icon
+      "@info",
+    
+    #-- Text
+      getvar("sysinfo")
+  );
+  
+  #-- Show Alert
+  alert(
+    #-- Alert Title
+      "Finished",
+    
+    #-- Alert Text
+      "You will be back to Menu",
+    
+    #-- Alert Icon
+      "@alert"
+  );
+  
+  #-- Back to Menu ( 2 Wizard UI to Back )
+  back("2");
+  
+endif;
+
+if prop("menu.prop","selected")=="4" then
+
+#-- Exit
+	if
+	  confirm(
+		#-- Title
+		  "Exit",
+		#-- Text
+		  "Are you sure want to exit the Installer?",
+		#-- Icon (Optional)
+		  "@alert"
+	  )=="yes"
+	then
+	  #-- Exit 
+	  exit("");
+	endif;
+
+endif;
+
+if prop("menu.prop","selected")=="3" then
+textbox(
+    #-- Title
+      "ChangeLog",
+    
+    #-- Subtitle
+      "Whats_up_new",
+    
+    #-- Icon
+      "@info",
+    
+    #-- Text
+      resread("changelogs.txt")
+  );
+    #-- Show Alert
+  alert(
+    #-- Alert Title
+      "Finished",
+    
+    #-- Alert Text
+      "You will be back to Menu",
+    
+    #-- Alert Icon
+      "@alert"
+  );
+  
+  #-- Back to Menu ( 2 Wizard UI to Back )
+  back("2");
+  
+endif;
+checkbox(
+ "Select Mods ",
+ "Please select mods that you want to use in this installation :",
+ "@personalize",
+ "mods.prop", 
+ "Mods", "", 2,
+ "doubletap2wake", "bla_bla", 0,
+ "sweep2wake", "", 0
+ ); 
+
+selectbox(
+ "Select Default Governor",
+ "Please select governor that you want to use in this installation :",
+ "@personalize",
+ "governor.prop", 
+ "dsdasd", "", 0,
+ "sada", "", 1,
+ "sdasd", "", 0
+ ); 
+
+selectbox(
+ "Select Default Max_freq",
+ "Please select Max_freq that you want to use in this kernel :",
+ "@personalize",
+ "max.prop", 
+ "1300000", "", 1,
+ "1196000", "", 0,
+ "1040000", "", 0,
+ "747500", "", 0,
+ "598000", "", 0
+ ); 
+
+selectbox(
+ "Select Default Min_freq",
+ "Please select Min_freq that you want to use in this kernel :",
+ "@personalize",
+ "min.prop", 
+ "1300000", "", 0,
+ "1196000", "", 0,
+ "1040000", "", 0,
+ "747500", "", 0,
+ "598000", "", 1
+ ); 
+
+install(
+  "Installing",
+  "<#999>Now flashing a ...\nPlease Wait...</#>",
+  "icons/install"
+);
+
+# Set Next Text fo Finish
+ini_set("text_next", "Finish");
+
+checkviewbox(
+  #-- Title
+    "Installation Completed",
+	
+  #-- Text
+    "<#selectbg_g><b>Congrats...</b></#>\n\n"+
+    "<b>Viking</b> has been installed into your device.\n\n",
+    
+#-- Icon
+    "@welcome",
+
+  #-- Checkbox Text
+    "Reboot your device now.",
+
+  #-- Initial Checkbox value ( 0=unchecked, 1=checked ) -  (Optional, default:0)
+    "1",
+
+  #-- Save checked value in variable "reboot_it" (Optional)
+    "reboot_it"
+);
+
+if
+  getvar("reboot_it")=="1"
+then
+  #
+  # reboot("onfinish");   - Reboot if anything finished
+  # reboot("now");        - Reboot Directly
+  # reboot("disable");    - If you set reboot("onfinish") before, use this command to revert it.
+  #
+  reboot("onfinish");
+endif;

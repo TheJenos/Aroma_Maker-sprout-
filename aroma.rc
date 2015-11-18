@@ -1,0 +1,49 @@
+#aroma_name is name of kernel you and must need to add ver numb
+#when you add data in somewhere don't use space.. use "~","_" like things
+
+aroma_name=Viking
+
+#logo is splash screen of kernel. don't forget this, do not add extention or parth for logo
+
+logo=logo
+theme=miui
+
+#govs mean governor count its start with 0 :D
+
+govs=3
+gov_default=sada
+gov_0=dsdasd
+gov_1=sada
+gov_2=sdasd
+freq=5
+max_freq=1300000
+min_freq=598000
+freq_0=1300000
+freq_1=1196000
+freq_2=1040000
+freq_3=747500
+freq_4=598000
+
+#mods mean extra things :3
+#if you add a mod example doubletap2wake
+#mods_number_name=doubletap2wake #this is name
+#mods_number_extra=no #extra mean if you add more than one data like opimizers you can add it   
+#if you put extra on, this script copy file from exra folder 
+#mods_number_data=1 #data is value that you want to change  
+#mods_number_path=/sys/android_touch/doubletap2wake
+#mods_number_defa=0 #def mean default val in checkbox.. if you put 1 for this aroma defaultly checked  
+#mods_number_text=bla_bla #text help for add discription for mods
+
+mods=2
+mods_0_name=doubletap2wake
+mods_0_extra=no
+mods_0_data=1
+mods_0_path=/sys/android_touch/doubletap2wake
+mods_0_defa=0
+mods_0_text=bla_bla
+
+#this is a example for extra mod
+
+mods_1_name=sweep2wake #there is a file name sweep2wake on extra folder
+mods_1_extra=yes
+mods_1_defa=0
